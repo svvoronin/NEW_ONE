@@ -6,9 +6,31 @@ class WebsiteTestUser(HttpUser):
 
     @task(1)
     def test1(self):
-        self.client.get("https://flaskml-sergey-voronin.azurewebsites.net")
+        self.client.get("https://flaskml-sergey-voronins.azurewebsites.net")
 
+    # @task(2)
+    # def test2(self):
+    #    self.client.post(
+    #        "https://flaskml-sergey-voronins.azurewebsites.net:443/predict")
     @task(2)
-    def test2(self):
-        self.client.post(
-            "https://flaskml-sergey-voronin.azurewebsites.net:443/predict")
+    def checkPredict(self):
+        self.client.post("/predict", json={
+            "CHAS": {
+                "0": 0
+            },
+            "RM": {
+                "0": 6.575
+            },
+            "TAX": {
+                "0": 296.0
+            },
+            "PTRATIO": {
+                "0": 15.3
+            },
+            "B": {
+                "0": 396.9
+            },
+            "LSTAT": {
+                "0": 4.98
+            }
+        })
